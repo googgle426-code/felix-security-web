@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>🛡️ Test Final Seguridad Privada – Ley 21.659</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:url("fondo-seguridad.jpg") no-repeat center center fixed;
+  background-size:cover;
+}
+
+.contenedor{
+  max-width:900px;
+  margin:30px auto;
+  background:rgba(255,255,255,0.95);
+  padding:20px;
+  border-radius:10px;
+}
+
+h1,h2{
+  text-align:center;
+}
+
+.pregunta{
+  margin:15px 0;
+  padding:10px;
+  border-bottom:1px solid #ccc;
+}
+
+button{
+  padding:10px 15px;
+  font-size:15px;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+}
+
+#enviar{
+  width:100%;
+  background:#003366;
+  color:white;
+  font-weight:bold;
+  margin-top:20px;
+}
+
+.whatsapp{
+  background:#25D366;
+  color:white;
+  width:100%;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.resultado{
+  text-align:center;
+  font-size:18px;
+  margin-top:20px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<img src="felix-logo.jpg" style="max-width:180px;display:block;margin:auto">
+
+<h1>🛡️ Test Final Seguridad Privada</h1>
+<h2>Ley 21.659 – Entrenamiento</h2>
+
+<form id="test">
+
+<h2>📘 Verdadero / Falso (70)</h2>
+<div id="vf"></div>
+
+<h2>📗 Alternativas (30)</h2>
+<div id="alt"></div>
+
+<button type="button" id="enviar" onclick="corregir()">✅ Finalizar Test</button>
+
+</form>
+
+<div id="resultado" class="resultado"></div>
+
+<a id="wa"
+   href="https://wa.me/?text=Estoy%20preparándome%20para%20el%20examen%20de%20Seguridad%20Privada%20Ley%2021.659%20en%20Felix%20Security"
+   target="_blank"
+   style="text-decoration:none;display:none;">
+  <button class="whatsapp">📲 Compartir por WhatsApp</button>
+</a>
+
+</div>
+
+<script>
+// ================= V/F (70) =================
+const vfPreguntas = [
+{p:"La Subsecretaría de Prevención del Delito es la autoridad administrativa.", r:"V"},
+{p:"Carabineros no tiene facultades de fiscalización.", r:"F"},
+{p:"Un guardia puede detener solo en flagrancia.", r:"V"},
+{p:"El curso incluye Derechos Humanos.", r:"V"},
+{p:"Extranjeros con residencia temporal pueden ser guardias.", r:"F"},
+{p:"Empresas se clasifican por nivel de riesgo.", r:"V"},
+{p:"Debe denunciar delitos en 24 horas.", r:"V"},
+{p:"Credencial OS10 es nacional.", r:"V"},
+{p:"Guardia puede portar armas.", r:"F"},
+{p:"Directivo organiza recursos.", r:"V"},
+{p:"Multas han aumentado.", r:"V"},
+{p:"Solo vigilante privado puede portar armas.", r:"V"},
+{p:"Chaleco antibalas puede usarse.", r:"V"},
+{p:"Abandonar puesto es falta grave.", r:"V"},
+{p:"Difundir imágenes en redes está permitido.", r:"F"},
+{p:"Accidente de trayecto es solo transporte público.", r:"F"},
+{p:"EPP debe ser gratuito.", r:"V"},
+{p:"Derecho a saber informa riesgos.", r:"V"},
+{p:"Riesgo es probabilidad de daño.", r:"V"},
+{p:"Humo es más peligroso que llamas.", r:"V"},
+{p:"Extintor PQS sirve A B C.", r:"V"},
+{p:"Fuego clase C es eléctrico.", r:"V"},
+{p:"Sofocar elimina oxígeno.", r:"V"},
+{p:"Triángulo del fuego tiene 3 elementos.", r:"V"},
+{p:"Nunca usar agua en fuego K.", r:"V"},
+{p:"Señalética debe ser fotoluminiscente.", r:"V"},
+{p:"Incidente pudo causar daño.", r:"V"},
+{p:"Ergonomía adapta trabajo al hombre.", r:"V"},
+{p:"Primero asegurar escena.", r:"V"},
+{p:"RCP es 30x2.", r:"V"},
+{p:"En convulsión poner objeto en boca.", r:"F"},
+{p:"Quemadura química se lava con agua.", r:"V"},
+{p:"Torniquete no es primera opción leve.", r:"V"},
+{p:"Shock presenta sudor frío.", r:"V"},
+{p:"DEA solo médico.", r:"F"},
+{p:"Heimlich es atragantamiento total.", r:"V"},
+{p:"Respeto dignidad es límite ético.", r:"V"},
+{p:"Puede pedir cédula, no retener.", r:"V"},
+{p:"Fuerza debe ser proporcional.", r:"V"},
+{p:"Seguridad privada complementa pública.", r:"V"},
+{p:"Discriminación es delito.", r:"V"},
+{p:"Secreto profesional es obligatorio.", r:"V"},
+{p:"Comunicación asertiva previene violencia.", r:"V"},
+{p:"Sensor PIR detecta calor.", r:"V"},
+{p:"CCTV no sirve como prueba.", r:"F"},
+{p:"Zona de seguridad es punto encuentro.", r:"V"},
+{p:"Detectores requieren pruebas.", r:"V"},
+{p:"Botón pánico debe ser accesible.", r:"V"},
+{p:"En robo prioridad es la vida.", r:"V"},
+{p:"Paquete sospechoso se abre.", r:"F"},
+{p:"En sismo usar ascensor.", r:"F"},
+{p:"Libro novedades obligatorio.", r:"V"},
+{p:"Libro no admite enmendaduras.", r:"V"},
+{p:"Amenaza bomba evacuar.", r:"V"},
+{p:"Rondas deben ser aleatorias.", r:"V"},
+{p:"Entrega turno presencial.", r:"V"},
+{p:"Uso grilletes requiere curso.", r:"V"}
+];
+
+// ================= ALTERNATIVAS (30) =================
+const alternativas = [
+{p:"Ley que regula seguridad privada:", o:["DL 3607","Ley 20.931","Ley 21.659","Código Penal"], r:2},
+{p:"Autoridad administrativa:", o:["Carabineros","Municipio","SPD","OS10"], r:2},
+{p:"Edad mínima:", o:["21","18","20","25"], r:1},
+{p:"Detención procede en:", o:["Sospecha","Orden","Flagrancia","Denuncia"], r:2},
+{p:"Credencial vencida:", o:["Multa","Sigue","Inhabilita","Nada"], r:2},
+{p:"Prioridad en incendio:", o:["Extintor","Bienes","Evacuar","Supervisor"], r:2},
+{p:"Libro de novedades es:", o:["Opcional","Interno","Obligatorio","Privado"], r:2},
+{p:"Uso de fuerza debe ser:", o:["Libre","Preventivo","Proporcional","Total"], r:2},
+{p:"Número SAMU:", o:["132","133","131","134"], r:2},
+{p:"Zona de seguridad es:", o:["Puesto","Oficina","Lugar seguro","Sala"], r:2},
+{p:"Ley contra discriminación:", o:["Laboral","Zamudio","Penal","Tránsito"], r:1},
+{p:"Celular en servicio:", o:["Permitido","Libre","Prohibido","Opcional"], r:2},
+{p:"Evento masivo desde:", o:["1000","2000","3000","5000"], r:2},
+{p:"Botón de pánico debe ser:", o:["Decorativo","Oculto","Accesible","Móvil"], r:2},
+{p:"Meta del guardia:", o:["Detener","Fuerza","Tranquilidad","Control"], r:2},
+{p:"Fuego clase B:", o:["Sólidos","Eléctrico","Líquidos","Metales"], r:2},
+{p:"QSL significa:", o:["Ubicación","Comprendido","Listo","Alerta"], r:1},
+{p:"QTH significa:", o:["Código","Radio","Ubicación","Turno"], r:2},
+{p:"Abandono de puesto es:", o:["Leve","Media","Gravísima","Nada"], r:2},
+{p:"Registro de acceso sirve para:", o:["Control","Multar","Castigar","Ignorar"], r:0},
+{p:"Uso de extintor apunta a:", o:["Llamas","Base","Techo","Humo"], r:1},
+{p:"Rol del guardia es:", o:["Represivo","Preventivo","Judicial","Militar"], r:1},
+{p:"CCTV significa:", o:["Control","Cámara","Circuito Cerrado","Central"], r:2},
+{p:"El PAS es:", o:["Proteger","Prevenir","Protocolizar","Proceder"], r:0},
+{p:"Primer auxilio es:", o:["Opcional","Obligatorio","Médico","Legal"], r:1},
+{p:"Credencial debe ser:", o:["Guardada","Visible","Digital","Oculta"], r:1},
+{p:"El jefe de seguridad:", o:["Vigila","Planifica","Detiene","Denuncia"], r:1},
+{p:"Prevención significa:", o:["Reacción","Anticipación","Castigo","Denuncia"], r:1},
+{p:"Disuasión busca:", o:["Confrontar","Asustar","Evitar delito","Pelear"], r:2},
+{p:"Observación sirve para:", o:["Informar","Dormir","Ignorar","Evitar"], r:0}
+];
+
+// ======= Render =======
+const vfDiv = document.getElementById("vf");
+vfPreguntas.forEach((q,i)=>{
+  vfDiv.innerHTML += `<div class="pregunta">${i+1}. ${q.p}<br>
+  <label><input type="radio" name="vf${i}" value="V"> V</label>
+  <label><input type="radio" name="vf${i}" value="F"> F</label></div>`;
+});
+
+const altDiv = document.getElementById("alt");
+alternativas.forEach((q,i)=>{
+  altDiv.innerHTML += `<div class="pregunta">${i+1}. ${q.p}<br>` +
+  q.o.map((op,j)=>`<label><input type="radio" name="alt${i}" value="${j}"> ${op}</label><br>`).join("") +
+  `</div>`;
+});
+
+// ======= Corrección =======
+function corregir(){
+  let puntos=0;
+
+  vfPreguntas.forEach((q,i)=>{
+    const r = document.querySelector(`input[name="vf${i}"]:checked`);
+    if(r && r.value===q.r) puntos++;
+  });
+
+  alternativas.forEach((q,i)=>{
+    const r = document.querySelector(`input[name="alt${i}"]:checked`);
+    if(r && Number(r.value)===q.r) puntos++;
+  });
+
+  document.getElementById("resultado").innerText =
+  `Puntaje: ${puntos} / 100`;
+
+  document.getElementById("wa").style.display="block";
+}
+</script>
+
+</body>
+</html>
