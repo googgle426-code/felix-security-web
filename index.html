@@ -8,8 +8,8 @@
 <meta property="og:title" content="Felix Security – Ley 21.659">
 <meta property="og:description" content="Estoy preparándome para el examen de Seguridad Privada Ley 21.659 en Felix Security.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://googgle426-code.github.io/felix-security-web/">
-<meta property="og:image" content="https://googgle426-code.github.io/felix-security-web/felix-logo.jpg">
+<meta property="og:url" content="https://googgle426-code.github.io/test-seguridad-privada-ley21659/">
+<meta property="og:image" content="https://googgle426-code.github.io/test-seguridad-privada-ley21659/felix-logo.jpg">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -62,6 +62,12 @@ footer{
   margin-top:40px;
   color:#555;
 }
+  .slogan{
+  font-style: italic;
+  color:#444;
+  margin-top:5px;
+}
+
 </style>
 </head>
 
@@ -333,12 +339,19 @@ footer{
 
 <section>
   <h2>Visitas al sitio</h2>
-  <p style="text-align:center;">
-    <img 
-      src="https://hitwebcounter.com/counter/counter.php?page=felixsecurityweb&style=0006&nbdigits=5&type=page&initCount=0"
-      alt="contador de visitas">
+  <p style="text-align:center; font-size:20px; font-weight:bold;">
+    👀 Visitas: <span id="visitas">Cargando...</span>
   </p>
 </section>
+
+<script>
+fetch('https://api.countapi.xyz/hit/googgle426-code.github.io/felix-security-web')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('visitas').innerText = data.value;
+  });
+</script>
+
 
 
 <footer style="text-align:center; padding:20px; font-size:14px; color:#888;">
