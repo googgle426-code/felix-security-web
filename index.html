@@ -345,10 +345,13 @@ footer{
 </section>
 
 <script>
-fetch('https://api.countapi.xyz/hit/googgle426-code.github.io/felix-security-web')
-  .then(res => res.json())
+fetch('https://api.countapi.xyz/hit/test-seguridad-privada-ley21659/visitas')
+  .then(response => response.json())
   .then(data => {
     document.getElementById('visitas').innerText = data.value;
+  })
+  .catch(() => {
+    document.getElementById('visitas').innerText = 'No disponible';
   });
 </script>
 
