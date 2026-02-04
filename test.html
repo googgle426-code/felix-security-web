@@ -220,8 +220,12 @@ function corregir(){
     if(r && Number(r.value)===q.r) puntos++;
   });
 
-  document.getElementById("resultado").innerText =
-  `Puntaje: ${puntos} / 100`;
+const porcentaje = Math.round((puntos / 100) * 100);
+
+document.getElementById("resultado").innerHTML =
+`✅ Puntaje: <strong>${puntos} / 100</strong><br>
+📊 Porcentaje: <strong>${porcentaje}%</strong>`;
+
 
   document.getElementById("wa").style.display="block";
 }
