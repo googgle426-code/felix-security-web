@@ -346,18 +346,19 @@ footer{
 
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("https://api.countapi.xyz/hit/googgle426-code.github.io/test-seguridad-privada-ley21659")
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("https://api.countapi.xyz/hit/felix-security-21659/visitas")
     .then(response => response.json())
     .then(data => {
       document.getElementById("contador").textContent = data.value;
     })
-    .catch(error => {
-      console.error("Error contador:", error);
-      document.getElementById("contador").textContent = "—";
+    .catch(err => {
+      console.error(err);
+      document.getElementById("contador").textContent = "Error";
     });
 });
 </script>
+
 
 
 
